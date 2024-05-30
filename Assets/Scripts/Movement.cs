@@ -7,47 +7,47 @@ public class Movement : MonoBehaviour
 {
     public float speed;
     public float jump;
-    private bool isFloored = false;
-    private bool doubleJump;
-    private float move;
-    private Rigidbody2D rb;
+    private bool _isFloored = false;
+    private bool _doubleJump;
+    private float _move;
+    private Rigidbody2D _rb;
 
     private void Start()
     {
-        isFloored = false;
-        rb = GetComponent<Rigidbody2D>();
+        _isFloored = false;
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isFloored = true;
+            _isFloored = true;
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        isFloored = false;
+        _isFloored = false;
     }
 
     void Update()
     {
-        move = Input.GetAxis("Horizontal");
+        _move = Input.GetAxis("Horizontal");
 
-        rb.velocity = new Vector2(move * speed, rb.velocity.y);
+        _rb.velocity = new Vector2(_move * speed, _rb.velocity.y);
 
-        if (isFloored && !Input.GetButton("Jump"))
+        if (_isFloored && !Input.GetButton("Jump"))
         {
-            doubleJump = false;
+            _doubleJump = false;
         }
 
         if (Input.GetButtonDown("Jump"))
         {
-            if (isFloored || doubleJump)
+            if (_isFloored || _doubleJump)
             {
-                rb.AddForce(new Vector2(rb.velocity.x, jump));
-                doubleJump = !doubleJump;
+                _rb.AddForce(new Vector2(_rb.velocity.x, jump));
+                _doubleJump = !_doubleJump;
             }
         }
 

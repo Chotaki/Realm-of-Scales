@@ -4,44 +4,28 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int enemyHp;
-    public GameObject enemy;
-    public bool isAttacked;
+    public int maxHp = 100;
+    private int _currentHp;
 
-    private void playerAttack()
-    {
-        enemyHp -= 10;
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        isAttacked = true;
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                playerAttack();
-            }
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        isAttacked = false;
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
-        isAttacked = false;
+        _currentHp = maxHp;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void takeDamage(int damage)
     {
-        if (enemyHp == 0)
+        _currentHp -= damage;
+
+        if (_currentHp <= 0)
         {
-            enemy.SetActive(false);
+            die();
         }
+    }
+
+    private void die()
+    {
+        Debug.Log("Enemy died");
+
+        this.gameObject.SetActive(false);
     }
 }

@@ -4,37 +4,41 @@ using UnityEngine;
 
 public class Combat : MonoBehaviour
 {
-    public int enemyHp;
-    public GameObject enemy;
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public int attackDamage = 20;
+    public float attackRate = 2f;
+    private float _nextAttackTime = 0f;
 
-    private void normalAttack()
-    {
-        enemyHp -= 10;
-    }
+    public LayerMask enemyLayer;
 
-    private void OnCollisionStay2D(Collision2D collision)
+    void Update()
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if(Time.time >= _nextAttackTime)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                normalAttack();
+                attack();
+                _nextAttackTime = Time.time + 1f / attackRate;
             }
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void attack()
     {
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
 
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            enemy.GetComponent<Enemy>().takeDamage(attackDamage);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDrawGizmosSelected()
     {
-        if (enemyHp == 0)
-        {
-            enemy.SetActive(false);
-        }
+        if (attackPoint == null)
+            return;
+
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
