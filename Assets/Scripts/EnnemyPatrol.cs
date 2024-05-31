@@ -7,13 +7,13 @@ public class EnnemyPatrol : MonoBehaviour
     public Transform[] waypoint;
 
     private Transform target;
-    private int destPoint;
+    private int destPoint = 0;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        target = waypoint[0];
     }
 
     // Update is called once per frame
@@ -22,6 +22,12 @@ public class EnnemyPatrol : MonoBehaviour
         Vector3 dir = target.position - transform.position;
         transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
 
-        if
+        //Si l'ennemi est quasiment arriver a ça destination
+        if(Vector3.Distance(transform.position, target.position) < 0.3f)
+        {
+            destPoint = (destPoint + 1) % waypoint.Length;
+            target = waypoint[destPoint];
+            transform.Rotate(0, 180, 0);
+        }
     }
 }
