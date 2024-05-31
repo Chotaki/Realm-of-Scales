@@ -7,6 +7,9 @@ public class Movement : MonoBehaviour
     private float move;
     private Rigidbody2D rb;
 
+    public ProjectileBehavior projectilePrefab;
+    public Transform LauchOffSet;
+
     private void Start()
     {
         // On récupère le rigidBody de notre joueur
@@ -22,4 +25,7 @@ public class Movement : MonoBehaviour
         // On change la velocité du rigibBody du joueur pour se déplacer
         rb.velocity = new Vector2(move * speed, rb.velocity.y);
     }
+
+    
+
 }

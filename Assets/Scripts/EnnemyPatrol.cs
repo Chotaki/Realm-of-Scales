@@ -6,9 +6,10 @@ public class EnnemyPatrol : MonoBehaviour
     public float speed;
     public Transform[] waypoint;
 
-    private Transform target;
+    public Transform target;
     private int destPoint = 0;
 
+    public ProjectileBehavior projectilePrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,12 @@ public class EnnemyPatrol : MonoBehaviour
             destPoint = (destPoint + 1) % waypoint.Length;
             target = waypoint[destPoint];
             transform.Rotate(0, 180, 0);
+
+            Instantiate(projectilePrefab, target.position, transform.rotation);
+
         }
+
+        
+
     }
 }
