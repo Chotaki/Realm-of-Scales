@@ -551,8 +551,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 960633816}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.4000001, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -571,8 +571,8 @@ GameObject:
   - component: {fileID: 1208738625}
   - component: {fileID: 1208738624}
   - component: {fileID: 1208738623}
-  - component: {fileID: 1208738628}
   - component: {fileID: 1208738629}
+  - component: {fileID: 1208738628}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -734,7 +734,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208738622}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -9.15, y: -2.95, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
@@ -755,9 +755,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 960633817}
-  attackRange: 0.71
-  attackDamage: 20
-  attackRate: 2
+  normalAttackRange: 0.5
+  normalAttackDamage: 20
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1170,8 +1169,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 2009167818}
   - {fileID: 739353289}
-  - {fileID: 1208738627}
   - {fileID: 340339333}
   - {fileID: 1977765428}
   - {fileID: 822948569}
   - {fileID: 1222891374}
+  - {fileID: 1208738627}
