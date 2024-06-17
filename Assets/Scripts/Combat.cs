@@ -9,14 +9,16 @@ public class Combat : MonoBehaviour
     public float normalAttackRange = 0.5f;
     public int normalAttackDamage = 20;
 
-    /*public float spellRange;
-    public int spellDamage;*/
+    public int mana = 100;
+
+    [SerializeField] public GameObject fireBall;
+    [SerializeField] public Transform origin;
+    public int spellDamage = 40;
 
     private float _attackRate = 2f;
     private float _nextAttackTime = 0f;
 
     public LayerMask enemyLayer;
-    //private Collider2D[] _hitEnemies;
 
     void Update()
     {
@@ -27,11 +29,11 @@ public class Combat : MonoBehaviour
                 normalAttack();
                 _nextAttackTime = Time.time + 1f / _attackRate;
             }
-            /*if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                spell();
+                throwFireBall();
                 _nextAttackTime = Time.time + 1f / _attackRate;
-            }*/
+            }
         }
     }
 
@@ -45,15 +47,10 @@ public class Combat : MonoBehaviour
         }
     }
 
-/*    public void spell()
+    public void throwFireBall()
     {
-        _hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, spellRange, enemyLayer);
-
-        foreach (Collider2D hitEnemy in _hitEnemies)
-        {
-            hitEnemy.GetComponent<Enemy>().takeDamage(spellDamage);
-        }
-    }*/
+        Instantiate(fireBall, origin.position, origin.rotation);
+    }
 
     private void OnDrawGizmosSelected()
     {
@@ -61,6 +58,5 @@ public class Combat : MonoBehaviour
             return;
 
         Gizmos.DrawWireSphere(attackPoint.position, normalAttackRange);
-        //Gizmos.DrawWireSphere(attackPoint.position, spellRange);
     }
 }

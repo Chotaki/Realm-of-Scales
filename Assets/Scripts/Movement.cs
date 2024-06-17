@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour
     private bool _doubleJump;
     private float _move;
     private Rigidbody2D _rb;
+    public BoxCollider2D feet;
 
     public Vector3 moveDirection;
 
@@ -32,6 +33,7 @@ public class Movement : MonoBehaviour
 
     private void Start()
     {
+        _canDash = true;
         _isFloored = false;
         _rb = GetComponent<Rigidbody2D>();
 
@@ -43,8 +45,12 @@ public class Movement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        Debug.Log(boxCollider.name);
+        Debug.Log(collision.gameObject.tag);
+
+        if (feet == collision.gameObject.CompareTag("Ground"))
         {
+            Debug.Log("is_Floored");
             _isFloored = true;
         }
     }
@@ -52,6 +58,7 @@ public class Movement : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         _isFloored = false;
+        Debug.Log("coll exit");
     }
 
     void Update()
