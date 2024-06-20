@@ -12,7 +12,6 @@ public class Combat : MonoBehaviour
     public int mana = 100;
 
     [SerializeField] public GameObject fireBall;
-    [SerializeField] public Transform origin;
     public int spellDamage = 40;
 
     private float _attackRate = 2f;
@@ -49,7 +48,7 @@ public class Combat : MonoBehaviour
 
     public void throwFireBall()
     {
-        Instantiate(fireBall, origin.position, origin.rotation);
+        Instantiate(fireBall, attackPoint.position, attackPoint.rotation);
     }
 
     private void OnDrawGizmosSelected()

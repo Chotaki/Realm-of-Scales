@@ -13,6 +13,7 @@ public class Movement : MonoBehaviour
     private float _move;
     private Rigidbody2D _rb;
     public BoxCollider2D feet;
+    public bool facingRight = true;
 
     public Vector3 moveDirection;
 
@@ -35,6 +36,7 @@ public class Movement : MonoBehaviour
     {
         _canDash = true;
         _isFloored = false;
+        facingRight = true;
         _rb = GetComponent<Rigidbody2D>();
 
         boxCollider = GetComponent<BoxCollider2D>();
@@ -45,12 +47,12 @@ public class Movement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(boxCollider.name);
-        Debug.Log(collision.gameObject.tag);
+        //Debug.Log(boxCollider.name);
+        //Debug.Log(collision.gameObject.tag);
 
         if (feet == collision.gameObject.CompareTag("Ground"))
         {
-            Debug.Log("is_Floored");
+            //Debug.Log("is_Floored");
             _isFloored = true;
         }
     }
@@ -58,7 +60,7 @@ public class Movement : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         _isFloored = false;
-        Debug.Log("coll exit");
+        //Debug.Log("coll exit");
     }
 
     void Update()
@@ -68,9 +70,25 @@ public class Movement : MonoBehaviour
             return;
         }
 
+        // Walk
         _move = Input.GetAxis("Horizontal"); // Q & D
 
         _rb.velocity = new Vector2(_move * speed, _rb.velocity.y);
+
+        //Debug.Log(facingRight);
+
+        // Flip the player, when walking
+        if (_move > 0 && !facingRight)
+        {
+            Flip();
+            facingRight = true;
+        }
+        else if (_move < 0 && facingRight)
+        {
+            Debug.Log("go left");
+            facingRight = false;
+            Flip();
+        }
 
         // Jump
         if (_isFloored && !Input.GetButton("Jump")) // Space
@@ -115,6 +133,13 @@ public class Movement : MonoBehaviour
             spriteRenderer.sprite = standing;
             boxCollider.size = standingSize;
         }
+    }
+
+    void Flip()
+    {
+        Vector3 currentScale = gameObject.transform.localScale;
+        currentScale.x *= -1;
+        gameObject.transform.localScale = currentScale;
     }
 
     private IEnumerator Dash()
