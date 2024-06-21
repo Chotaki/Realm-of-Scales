@@ -88,6 +88,7 @@ public class Movement : MonoBehaviour
             Debug.Log("go left");
             facingRight = false;
             Flip();
+            Debug.Log(facingRight);
         }
 
         // Jump

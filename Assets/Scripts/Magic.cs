@@ -7,27 +7,28 @@ public class Magic : MonoBehaviour
 {
     private Rigidbody2D _rb;
     public GameObject player;
-    [SerializeField] public float _throwSpeed;
+    public bool fireLeft = false;
+    [SerializeField] public float throwSpeed;
  
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-
     }
 
-    void Update()
+    private void FixedUpdate()
     {
-        Debug.Log(player.GetComponent<Movement>().facingRight == true);
-
-        if (player.GetComponent<Movement>().facingRight)
+        //Vector2 force = new Vector2(Vector3.right.x, Vector3.right.y);
+        if (fireLeft == true)
         {
-            Debug.Log("fire to the right");
-            _rb.velocity = new Vector2(_throwSpeed, _rb.velocity.y);
+            //Debug.Log("fire to the left");
+            //_rb.velocity = new Vector2(throwSpeed, Vector3.left.x);
+            _rb.AddForce(transform.right * -1, ForceMode2D.Impulse);
         }
-        else if (player.GetComponent<Movement>().facingRight == false)
+        else
         {
-            Debug.Log("fire to the left");
-            _rb.velocity = new Vector2(_throwSpeed, Vector3.left.y);
+            //Debug.Log("fire to the right");
+            //_rb.velocity = new Vector2(throwSpeed, Vector3.right.x);
+            _rb.AddForce(transform.right, ForceMode2D.Impulse);
         }
     }
 

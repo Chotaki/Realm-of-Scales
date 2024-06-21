@@ -13,6 +13,7 @@ public class Combat : MonoBehaviour
 
     [SerializeField] public GameObject fireBall;
     public int spellDamage = 40;
+    public bool fireGoLeft = false;
 
     private float _attackRate = 2f;
     private float _nextAttackTime = 0f;
@@ -28,11 +29,20 @@ public class Combat : MonoBehaviour
                 normalAttack();
                 _nextAttackTime = Time.time + 1f / _attackRate;
             }
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && mana > 0)
             {
                 throwFireBall();
                 _nextAttackTime = Time.time + 1f / _attackRate;
             }
+        }
+
+        if (this.GetComponent<Movement>().facingRight == false)
+        {
+            fireBall.GetComponent<Magic>().fireLeft = true;
+        }
+        else if (this.GetComponent<Movement>().facingRight == true)
+        {
+            fireBall.GetComponent<Magic>().fireLeft = false;
         }
     }
 
@@ -48,7 +58,8 @@ public class Combat : MonoBehaviour
 
     public void throwFireBall()
     {
-        Instantiate(fireBall, attackPoint.position, attackPoint.rotation);
+        Instantiate(fireBall, attackPoint.position, Quaternion.identity);
+        mana -= 10;
     }
 
     private void OnDrawGizmosSelected()
