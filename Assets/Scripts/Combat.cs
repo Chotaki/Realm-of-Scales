@@ -31,27 +31,23 @@ public class Combat : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                _attackTimer = Time.time;
-
-                if (Input.GetKeyUp(KeyCode.Mouse0))
+                Debug.Log(_attackTimer);
+            }
+            if (Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                if (Time.time - _attackTimer > _chargingTime)
                 {
-                    if (Time.time - _attackTimer > _chargingTime)
-                    {
-                        Debug.Log(_attackTimer);
-                        chargedAttack();
-                        _nextAttackTime = Time.time + 1f / _attackRate;
-                    } else
-                    {
-                        normalAttack();
-                        _nextAttackTime = Time.time + 1f / _attackRate;
-                    }
+                    Debug.Log(_attackTimer);
+                    chargedAttack();
+                    _nextAttackTime = Time.time + 1f / _attackRate;
                 }
-                /*else
+                else
                 {
                     normalAttack();
                     _nextAttackTime = Time.time + 1f / _attackRate;
-                }*/
+                }
             }
+
             if (Input.GetKeyDown(KeyCode.E) && mana > 0)
             {
                 throwFireBall();
