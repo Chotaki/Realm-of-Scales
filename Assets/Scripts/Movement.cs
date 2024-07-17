@@ -30,6 +30,8 @@ public class Movement : MonoBehaviour
     public Vector2 standingSize;
     public Vector2 crouchingSize;
 
+    public Animator animator;
+
     [SerializeField] private TrailRenderer _trailRenderer;
 
     private void Start()
@@ -75,7 +77,7 @@ public class Movement : MonoBehaviour
 
         _rb.velocity = new Vector2(_move * speed, _rb.velocity.y);
 
-        //Debug.Log(facingRight);
+        animator.SetFloat("Speed", Mathf.Abs(_move));
 
         // Flip the player, when walking
         if (_move > 0 && !facingRight)
@@ -111,15 +113,18 @@ public class Movement : MonoBehaviour
         if (Input.GetButtonDown("Sprint")) // Right Mouse Button
         {
             speed += 10;
+            animator.SetFloat("Speed", 10.1f);
         }
         if (Input.GetButtonUp("Sprint")) // Right Mouse Button
         {
             speed -= 10;
+            animator.SetFloat("Speed", Mathf.Abs(_move));
         }
 
         // Dash
         if (Input.GetButtonDown("Dash")) // R
         {
+            animator.SetBool("IsDashing", true);
             StartCoroutine(Dash());
         }
 
@@ -127,7 +132,7 @@ public class Movement : MonoBehaviour
         if (Input.GetButtonDown("Crouch")) // C
         {
             spriteRenderer.sprite = crouching;
-            boxCollider.size = crouchingSize;
+            boxCollider.size = crouchingSize;   
         }
         if (Input.GetButtonUp("Crouch")) // C
         {
@@ -155,6 +160,7 @@ public class Movement : MonoBehaviour
         _trailRenderer.emitting = false;
         _rb.gravityScale = originalGravity;
         _isDashing = false;
+        animator.SetBool("IsDashing", false);
         yield return new WaitForSeconds(_dashingCooldown);
         _canDash = true;
     }
