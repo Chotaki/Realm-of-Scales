@@ -15,7 +15,7 @@ public class Potion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-/*        for (int i = 0; i < player.GetComponent<Inventory>().inventory.Count; i++)
+/*      for (int i = 0; i < player.GetComponent<Inventory>().inventory.Count; i++)
         {*/
             if (Input.GetKeyDown(KeyCode.U) /*&& player.GetComponent<Inventory>().inventory[i] == this*/)
             {
