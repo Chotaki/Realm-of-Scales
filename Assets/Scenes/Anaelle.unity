@@ -410,6 +410,7 @@ GameObject:
   - component: {fileID: 340339331}
   - component: {fileID: 340339334}
   - component: {fileID: 340339335}
+  - component: {fileID: 340339336}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -555,7 +556,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: c1b880ac5e2ae3d4d89dbb8579e156f8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -563,6 +564,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &340339336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340339330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1709af2e6f336c34faa4c30c2987bd3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  waypoint: []
+  target: {fileID: 0}
+  projectilePrefab: {fileID: 0}
 --- !u!1 &702370903
 GameObject:
   m_ObjectHideFlags: 0
